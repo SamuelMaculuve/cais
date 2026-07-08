@@ -29,7 +29,7 @@ function renderHeader() {
         <nav class="nav-links" aria-label="Menu principal">
           ${pages.map(([href, label]) => `<a href="${href}" ${current === href ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
         </nav>
-        <a class="btn btn-primary nav-cta" href="contact.html">${icon("send")} Falar connosco</a>
+        <a class="btn btn-primary nav-cta" href="contact.html">${icon("send", 14)} Falar connosco</a>
         <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">${icon("menu")}</button>
       </div>
     </header>`;
@@ -153,7 +153,10 @@ function initFaq() {
     button.addEventListener("click", () => {
       const item = button.closest(".faq-item");
       const open = item.classList.toggle("is-open");
+      const iconEl = button.querySelector("i");
       button.setAttribute("aria-expanded", String(open));
+      if (iconEl) iconEl.setAttribute("data-lucide", open ? "minus" : "plus");
+      if (window.lucide) window.lucide.createIcons();
     });
   });
 }
